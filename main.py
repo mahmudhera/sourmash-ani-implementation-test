@@ -4,6 +4,7 @@ import argparse
 from utils.mutate_genome import mutate_using_SMM
 from utils.ani_by_sourmash import compute_ani_by_sourmash
 from utils.helper import read_sourmash_sketch, containment_to_mutation_rate
+import pandas as pd
 
 def parse_args():
     parser = argparse.ArgumentParser(description="This script will mutate a given genome, and determine the ANI using sourmash",
@@ -22,7 +23,7 @@ if __name__ == "__main__":
     genome_fname, ksize, pstart, pend, stepsize, seed, scalef = parse_args()
     scaled = int(1.0/scalef)
     mutated_genome_fname = 'mutated/' + genome_fname.split('/')[-1]
-    print('True ANI', 'Our ANI estimate', 'Sourmash ANI estimate')
+    ani_list = []
     for mut_rate in np.arange(pstart, pend+stepsize, stepsize):
         mutate_using_SMM(genome_fname, mutated_genome_fname, mut_rate, seed)
         ani_estimates_sourmash = compute_ani_by_sourmash(genome_fname, mutated_genome_fname, seed, ksize, scaled)
@@ -34,4 +35,8 @@ if __name__ == "__main__":
         ani_2 = 1.0 - containment_to_mutation_rate( fmh_sketch2.get_containment(fmh_sketch1), ksize )
         true_ani_estimate = (ani_1 + ani_2) / 2.0
 
-        print(1.0 - mut_rate, true_ani_estimate, sourmash_ani_estimate)
+        ani_list.append(1.0 - mut_rate, true_ani_estimate, sourmash_ani_estimate)
+
+    df = pd.DataFrame(ani_list)
+    df.columns = ['True ANI', 'Our ANI est', 'SM ANI est']
+    print(df)
