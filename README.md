@@ -9,4 +9,7 @@ Steps:
 1. Check if there is any discrepancy between the previous two estimates
 1. Repeat for multiple mutation rates
 
+# Directory organization
+1. utils: all helper codes
+
 ## How to run
