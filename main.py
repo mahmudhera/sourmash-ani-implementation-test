@@ -3,6 +3,7 @@ import numpy as np
 import argparse
 from utils.mutate_genome import mutate_using_SMM
 from utils.ani_by_sourmash import compute_ani_by_sourmash
+from utils.helper import read_sourmash_sketch, containment_to_mutation_rate
 
 def parse_args():
     parser = argparse.ArgumentParser(description="This script will mutate a given genome, and determine the ANI using sourmash",
@@ -26,3 +27,8 @@ if __name__ == "__main__":
         mutate_using_SMM(genome_fname, mutated_genome_fname, mut_rate, seed)
         ani_estimates_sourmash = compute_ani_by_sourmash(genome_fname, mutated_genome_fname, seed, ksize, scaled)
         print(ani_estimates_sourmash)
+        fmh_sketch1 = read_sourmash_sketch('sketch1')
+        fmh_sketch2 = read_sourmash_sketch('sketch2')
+        ani_1 = containment_to_mutation_rate( fmh_sketch1.get_containment(fmh_sketch2) )
+        ani_2 = containment_to_mutation_rate( fmh_sketch2.get_containment(fmh_sketch1) )
+        print(ani1, ani2)
