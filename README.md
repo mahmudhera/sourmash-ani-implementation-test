@@ -2,7 +2,7 @@
 
 Tests if sourmash implementation matches our implementation.
 
-Steps:
+Steps implemented:
 1. Take a fixed mutation rate, then simulate mutation using SMM (simple mutation model)
 1. Take the mutated genome and the original genome, then determine the ANI estimate using sourmash compare
 1. Take the mutated genome and the original genome, then determine the ANI estimate using our implementation independently
@@ -13,3 +13,4 @@ Steps:
 1. utils: all helper codes
 
 ## How to run
+`python main.py -h`
