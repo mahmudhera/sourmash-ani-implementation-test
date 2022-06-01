@@ -29,6 +29,6 @@ if __name__ == "__main__":
         print(ani_estimates_sourmash)
         fmh_sketch1 = read_sourmash_sketch('sketch1', scalef)
         fmh_sketch2 = read_sourmash_sketch('sketch2', scalef)
-        ani_1 = containment_to_mutation_rate( fmh_sketch1.get_containment(fmh_sketch2), ksize )
-        ani_2 = containment_to_mutation_rate( fmh_sketch2.get_containment(fmh_sketch1), ksize )
+        ani_1 = 1.0 - containment_to_mutation_rate( fmh_sketch1.get_containment(fmh_sketch2), ksize )
+        ani_2 = 1.0 - containment_to_mutation_rate( fmh_sketch2.get_containment(fmh_sketch1), ksize )
         print(ani_1, ani_2)
