@@ -13,7 +13,7 @@ def parse_args():
     parser.add_argument("--pend", type=float, help="Ending value of mutation rate", default=1.0)
     parser.add_argument("--stepsize", type=float, help="Step size of the mutation rate", default=0.01)
     parser.add_argument("--seed", type=int, help="Random seed", default=0)
-    parser.add_argument("--scalef", type=int, help="Scale factor, in [0,1]", default=0.001)
+    parser.add_argument("--scalef", type=float, help="Scale factor, in [0,1]", default=0.001)
     args = parser.parse_args()
     return args.genome, args.ksize, args.pstart, args.pend, args.stepsize, args.seed, args.scalef
 
