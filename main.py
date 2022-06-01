@@ -22,13 +22,16 @@ if __name__ == "__main__":
     genome_fname, ksize, pstart, pend, stepsize, seed, scalef = parse_args()
     scaled = int(1.0/scalef)
     mutated_genome_fname = 'mutated/' + genome_fname.split('/')[-1]
-    print(mutated_genome_fname)
-    for mut_rate in np.arange(pstart, pend+0.001, stepsize):
+    print('True ANI', 'Our ANI estimate', 'Sourmash ANI estimate')
+    for mut_rate in np.arange(pstart, pend+stepsize, stepsize):
         mutate_using_SMM(genome_fname, mutated_genome_fname, mut_rate, seed)
         ani_estimates_sourmash = compute_ani_by_sourmash(genome_fname, mutated_genome_fname, seed, ksize, scaled)
-        print(ani_estimates_sourmash)
+        sourmash_ani_estimate = sum(ani_estimates_sourmash)/2.0
+
         fmh_sketch1 = read_sourmash_sketch('sketch1', scalef)
         fmh_sketch2 = read_sourmash_sketch('sketch2', scalef)
         ani_1 = 1.0 - containment_to_mutation_rate( fmh_sketch1.get_containment(fmh_sketch2), ksize )
         ani_2 = 1.0 - containment_to_mutation_rate( fmh_sketch2.get_containment(fmh_sketch1), ksize )
-        print(ani_1, ani_2)
+        true_ani_estimate = (ani_1 + ani_2) / 2.0
+
+        print(1.0 - mut_rate, true_ani_estimate, sourmash_ani_estimate)
