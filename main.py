@@ -23,8 +23,6 @@ if __name__ == "__main__":
     mutated_genome_fname = 'mutated/' + genome_fname.split('/')[-1]
     print(mutated_genome_fname)
     for mut_rate in np.arange(pstart, pend+0.001, stepsize):
-        # run SMM
         mutate_using_SMM(genome_fname, mutated_genome_fname, mut_rate, seed)
-        # compute the ani
         ani_estimates_sourmash = compute_ani_by_sourmash(genome_fname, mutated_genome_fname, seed, ksize, scaled)
-        # print this ani
+        print(ani_estimates_sourmash)
