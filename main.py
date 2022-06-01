@@ -39,4 +39,8 @@ if __name__ == "__main__":
 
     df = pd.DataFrame(ani_list)
     df.columns = ['True ANI', 'Our ANI est', 'SM ANI est']
-    print(df)
+    print(df.to_string())
+    f = open('ani_comparison_results', 'w')
+    f.write(df.to_string())
+    f.write('\n')
+    f.close()
