@@ -35,7 +35,7 @@ if __name__ == "__main__":
         ani_2 = 1.0 - containment_to_mutation_rate( fmh_sketch2.get_containment(fmh_sketch1), ksize )
         true_ani_estimate = (ani_1 + ani_2) / 2.0
 
-        ani_list.append(1.0 - mut_rate, true_ani_estimate, sourmash_ani_estimate)
+        ani_list.append([1.0 - mut_rate, true_ani_estimate, sourmash_ani_estimate])
 
     df = pd.DataFrame(ani_list)
     df.columns = ['True ANI', 'Our ANI est', 'SM ANI est']
