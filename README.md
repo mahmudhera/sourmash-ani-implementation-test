@@ -24,3 +24,5 @@ using the containment index manually. Then, these two values are matched for dis
 The results are in the file `ani_comparison_results`.
 There is a faithful agreement between the two methods for ANI >= 66%.
 For ANI <= 65%, we notice some discrepancies.
+
+Update: after switching to the `latest` branch (4.4.1.dev3+g99c3997), we see that there is perfect agreement!
